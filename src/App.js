@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from "react";
 
-function App() {
+()=> {
+  const [images, setImages] = useState([]);
+
   useEffect(() => {
-    console.log("useEffect called");
-  });
+    fetch("https://dog.ceo/api/breeds/image/random/3")
+      .then((r) => r.json())
+      .then((data) => {
+        setImages(data.message);
+      });
+  }, []);
 
-  console.log("Component rendering");
-
-  return <button>Click Me</button>;
+  return (
+    <div>
+      {images.map((image) => (
+        <img src={image} key={image} />
+      ))}
+    </div>
+  );
 }
+
 
 export default App;
